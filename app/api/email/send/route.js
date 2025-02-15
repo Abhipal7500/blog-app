@@ -2,7 +2,7 @@ import EmailModel from "@/lib/models/EmailModel";
 import nodemailer from "nodemailer";
 
 export const config = {
-    runtime: "nodejs", // Ensures Vercel uses Node.js runtime
+    runtime: "nodejs",
 };
 
 export async function POST(req) {
@@ -17,12 +17,12 @@ export async function POST(req) {
         const { title, description, category } = await req.json();
 
         const transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST,
-            port: Number(process.env.SMTP_PORT),
+            host: "sandbox.smtp.mailtrap.io", // Hardcoded SMTP host
+            port: 2525, // Hardcoded SMTP port
             secure: false,
             auth: {
-                user: process.env.SMTP_USER,
-                pass: process.env.SMTP_PASS,
+                user: "e2f96e709b758d", // Hardcoded SMTP user
+                pass: "86fe32e4068511", // Hardcoded SMTP password
             },
             tls: {
                 rejectUnauthorized: false,

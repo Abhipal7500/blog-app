@@ -1,14 +1,24 @@
 import { assets } from '@/Assets/assets';
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import React from 'react';
 
 const BlogItem = ({ title, description, category, image, id }) => {
   return (
-    <div className="max-w-[330px] bg-white border border-gray-300 shadow-lg rounded-lg overflow-hidden transition hover:shadow-xl">
+    <motion.div 
+      initial={{ opacity: 0, scale: 0.9 }} 
+      animate={{ opacity: 1, scale: 1 }} 
+      transition={{ duration: 0.6 }}
+      whileHover={{ scale: 1.03 }}
+      className="max-w-[330px] bg-white border border-gray-300 shadow-lg rounded-lg overflow-hidden transition hover:shadow-xl"
+    >
       {/* Blog Image */}
       <Link href={`/blogs/${id}`}>
-        <div className="w-full h-[220px] flex justify-center items-center bg-gray-200 hover:opacity-90 transition">
+        <motion.div 
+          whileHover={{ scale: 1.05 }} 
+          className="w-full h-[220px] flex justify-center items-center bg-gray-200 hover:opacity-90 transition"
+        >
           <Image 
             src={image} 
             alt={title} 
@@ -16,7 +26,7 @@ const BlogItem = ({ title, description, category, image, id }) => {
             height={400} 
             className="w-full h-full object-cover"
           />
-        </div>
+        </motion.div>
       </Link>
 
       {/* Category */}
@@ -30,14 +40,17 @@ const BlogItem = ({ title, description, category, image, id }) => {
         <p className="mb-3 text-sm text-gray-600">{description.slice(0, 120)}...</p>
 
         {/* Read More Link */}
-        <div className="flex items-center">
+        <motion.div 
+          whileHover={{ x: 5 }}
+          className="flex items-center"
+        >
           <Link href={`/blogs/${id}`} className="text-blue-600 font-medium hover:underline">
             Read more
           </Link>
           <Image src={assets.arrow} className="ml-2" alt="Arrow" width={12} />
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

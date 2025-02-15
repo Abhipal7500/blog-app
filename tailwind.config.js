@@ -15,4 +15,8 @@ module.exports = {
     },
   },
   plugins: [],
-}
+  safelist: [
+    'text-red-500', 'text-blue-500', 'text-green-500', // Add common dynamic classes
+    'bg-gray-100', 'bg-white', 'shadow-lg' // Ensure these classes are not purged
+  ],
+};

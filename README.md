@@ -99,40 +99,6 @@ The application is deployed on **Vercel**. To deploy your version:
 vercel
 ```
 
-## Evaluation Criteria
-
-### 1️⃣ Functionality
-✔ Fully functional **CRUD operations**  
-✔ Secure **authentication & authorization**  
-✔ **Optimized database queries**  
-
-### 2️⃣ User Interface
-✔ **Responsive & mobile-friendly** design  
-✔ Follows **accessibility best practices**  
-
-### 3️⃣ Code Quality
-✔ Well-structured, **modular code**  
-✔ Implemented **lazy loading, caching, and error handling**  
-
-### 4️⃣ Testing
-✔ Considered **unit testing, integration testing, and e2e testing**  
-
-### 5️⃣ Deployment & CI/CD
-✔ Deployed on **Vercel** with **CI/CD pipeline**  
-
-### 6️⃣ Real-World Considerations
-✔ **Error handling** and **debugging enhancements**  
-✔ **Security measures** to prevent unauthorized access  
-
-## Screenshots
-
-### Admin Dashboard
-![Admin Panel](https://your-image-url.com/admin-dashboard.png)
-
-### Blog Page
-![Blog Page](https://your-image-url.com/blog-page.png)
-
----
 
 ## Contributing
 

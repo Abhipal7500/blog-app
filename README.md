@@ -66,7 +66,7 @@ pnpm install
 Create a `.env.local` file and add the following:
 
 ```env
-MONGO_URI=mongodb+srv://your_username:your_password@cluster.mongodb.net/blog-app
+MONGO_URI=
 ADMIN_EMAIL=admin@example.com
 ADMIN_PASSWORD=admin123
 ADMIN_ROLE=admin

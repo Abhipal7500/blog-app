@@ -36,7 +36,7 @@ const Page = () => {
             formData.append('image', image);
     
             const response = await axios.post('/api/blog', formData);
-    
+             console.log(response);
             if (response.data.success) {
                 
                 await axios.post('/api/email/send', {
@@ -44,7 +44,7 @@ const Page = () => {
                     description: data.description,
                     category: data.category,
                 });
-    
+      console.log("send email wala part");
                 toast.success("Blog added & email sent!");
                 setImage(false);
                 setData({

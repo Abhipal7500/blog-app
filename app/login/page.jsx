@@ -1,35 +1,55 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function LoginPage() {
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleLogin = async () => {
+        if (!email || !password) {
+            setError("Please fill in both fields.");
+            return;
+        }
+
         setError('');
-        const res = await fetch('/api/auth', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
-        });
-        
-        const data = await res.json();
-    
-        if (res.ok) {
-            const decodedToken = JSON.parse(atob(data.token.split('.')[1])); // Decode JWT payload
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('tokenExpiry', decodedToken.exp * 1000); // Store expiry in milliseconds
-    
-            console.log('Login successful');
-            router.push('/admins'); // Redirect to Admin Dashboard
-        } else {
-            setError(data.error);
+        setLoading(true);
+
+        try {
+            const res = await fetch('/api/auth', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                try {
+                    const decodedToken = JSON.parse(window.atob(data.token.split('.')[1]));
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('tokenExpiry', decodedToken.exp * 1000);
+
+                    console.log('Login successful');
+                    router.push('/admins');
+                } catch (decodeError) {
+                    console.error("Invalid token format:", decodeError);
+                    setError("Invalid token received. Please try again.");
+                }
+            } else {
+                setError(data.error || "Invalid credentials. Please try again.");
+            }
+        } catch (err) {
+            console.error("Network error:", err);
+            setError("Something went wrong. Please try again later.");
+        } finally {
+            setLoading(false);
         }
     };
-    
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -44,6 +64,7 @@ export default function LoginPage() {
                     value={email} 
                     onChange={(e) => setEmail(e.target.value)} 
                     className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    disabled={loading}
                 />
 
                 <input 
@@ -52,17 +73,21 @@ export default function LoginPage() {
                     value={password} 
                     onChange={(e) => setPassword(e.target.value)} 
                     className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    disabled={loading}
                 />
 
                 <button 
                     onClick={handleLogin} 
-                    className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition duration-200"
+                    className={`w-full text-white py-3 rounded-lg transition duration-200 ${
+                        loading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"
+                    }`}
+                    disabled={loading}
                 >
-                    Login
+                    {loading ? "Logging in..." : "Login"}
                 </button>
 
                 <p className="text-gray-600 text-sm text-center mt-4">
-                    Don't have an account? <a href="/register" className="text-blue-500 hover:underline">Sign Up</a>
+                    Don&apos;t have an account? <Link href="/register" className="text-blue-500 hover:underline">Sign Up</Link>
                 </p>
             </div>
         </div>

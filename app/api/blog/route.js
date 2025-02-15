@@ -1,5 +1,5 @@
 import { ConnectDB } from "@/lib/config/db"
-import mongoose from "mongoose"; // ✅ Import mongoose
+import mongoose from "mongoose";
 import BlogModel from "@/lib/models/BlogModel";
 const { NextResponse } = require("next/server")
 import { writeFile } from 'fs/promises'

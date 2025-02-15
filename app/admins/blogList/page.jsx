@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 import UpdateBlogModal from '@/Components/AdminComponents/UpdateBlogModal';
 
-const page = () => {
+const Page = () => {
   const [blogs, setBlogs] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedBlog, setSelectedBlog] = useState(null);
@@ -34,8 +34,12 @@ const page = () => {
   }
 
   useEffect(() => {
-    fetchBlogs()
+    const getBlogs = async () => {
+      await fetchBlogs();
+    };
+    getBlogs();
   }, []);
+  
 
   return (
     <div className='flex-1 pt-5 px-5 sm:pt-12 sm:pl-16'>
@@ -64,4 +68,4 @@ const page = () => {
   )
 }
 
-export default page;
+export default Page;

@@ -15,7 +15,7 @@ export default function Layout({ children }) {
     useEffect(() => {
         const checkAdmin = async () => {
             try {
-                // Check for token in localStorage
+               
                 const token = localStorage.getItem("token");
                 
                 if (!token) {
@@ -23,10 +23,10 @@ export default function Layout({ children }) {
                     return;
                 }
 
-                // Decode JWT token
+             
                 const decoded = JSON.parse(atob(token.split(".")[1]));
                 console.log(decoded);
-                // Check if the user is an admin and verified
+                
                 if (decoded.role === "admin" && decoded.verified) {
                     setIsAdmin(true);
                 } else {
@@ -43,15 +43,15 @@ export default function Layout({ children }) {
     }, [router]);
 
     const handleLogout = () => {
-        // Remove the token from localStorage
+        
         localStorage.removeItem("token");
-        // Redirect to login page
+    
         router.push("/login");
     };
 
     if (loading) return <div className="h-screen flex justify-center items-center">Loading...</div>;
 
-    if (!isAdmin) return null; // Prevent rendering until authentication is checked
+    if (!isAdmin) return null; 
 
     return (
         <div className="flex">

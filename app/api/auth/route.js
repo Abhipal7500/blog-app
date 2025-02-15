@@ -4,12 +4,12 @@ import jwt from 'jsonwebtoken';
 export async function POST(req) {
     const { email, password } = await req.json();
 
-    // Get admin details from environment variables
+
     const adminUser = {
         email: process.env.ADMIN_EMAIL,
         password: process.env.ADMIN_PASSWORD,
         role: process.env.ADMIN_ROLE,
-        verified: process.env.ADMIN_VERIFIED === 'true' // Convert string to boolean
+        verified: process.env.ADMIN_VERIFIED === 'true' 
     };
 
     if (email !== adminUser.email || password !== adminUser.password) {

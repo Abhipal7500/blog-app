@@ -4,7 +4,7 @@ import nodemailer from "nodemailer";
 
 export async function POST(req) {
     try {
-       // await connectDB(); // Connect to MongoDB
+      
 
         const subscribers = await EmailModel.find({}, "email");
         const emailList = subscribers.map(sub => sub.email);

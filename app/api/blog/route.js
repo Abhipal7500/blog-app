@@ -11,8 +11,6 @@ const LoadDB = async () => {
 
 LoadDB();
 
-
-// API Endpoint to get all blogs
 export async function GET(request) {
 
   const blogId = request.nextUrl.searchParams.get("id");
@@ -27,7 +25,7 @@ export async function GET(request) {
 }
 
 
-// API Endpoint For Uploading Blogs
+
 export async function POST(request) {
 
   const formData = await request.formData();
@@ -55,7 +53,6 @@ export async function POST(request) {
   return NextResponse.json({ success: true, msg: "Blog Added" })
 }
 
-// Creating API Endpoint to delete Blog
 
 export async function DELETE(request) {
   const id = await request.nextUrl.searchParams.get('id');
@@ -93,9 +90,9 @@ export async function PUT(request) {
       author: formData.get("author"),
     };
 
-    console.log("Update Data:", updateData); // Debugging log
+    console.log("Update Data:", updateData); 
 
-    // If a new image is uploaded, save it and delete the old one
+
     const image = formData.get("image");
     if (image && typeof image === "object") {
       const imageByteData = await image.arrayBuffer();
@@ -106,9 +103,9 @@ export async function PUT(request) {
       await writeFile(newImagePath, buffer);
       updateData.image = `/${timestamp}_${image.name}`;
 
-      console.log("New Image Path:", updateData.image); // Debugging log
+      console.log("New Image Path:", updateData.image); 
 
-      // Delete old image
+     
       if (existingBlog.image) {
         await fs.promises.unlink(`./public${existingBlog.image}`).catch((err) => {
           console.error("Error deleting old image:", err);
@@ -116,14 +113,14 @@ export async function PUT(request) {
       }
     }
 
-    // Update the blog post
+   
     const updatedBlog = await BlogModel.findByIdAndUpdate(id, updateData, { new: true });
 
     if (!updatedBlog) {
       return NextResponse.json({ success: false, msg: "Failed to update blog" }, { status: 500 });
     }
 
-    console.log("Updated Blog:", updatedBlog); // Debugging log
+    console.log("Updated Blog:", updatedBlog); 
 
     return NextResponse.json({ success: true, msg: "Blog Updated", blog: updatedBlog });
 

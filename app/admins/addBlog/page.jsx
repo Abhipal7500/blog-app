@@ -5,7 +5,7 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 
-const Page = () => {  // Renamed from "page" to "Page"
+const Page = () => { 
 
     const [image,setImage] = useState(false);
     const [data,setData] = useState({
@@ -38,7 +38,7 @@ const Page = () => {  // Renamed from "page" to "Page"
             const response = await axios.post('/api/blog', formData);
     
             if (response.data.success) {
-                // Notify subscribers after blog is created
+                
                 await axios.post('/api/email/send', {
                     title: data.title,
                     description: data.description,
@@ -89,4 +89,4 @@ const Page = () => {  // Renamed from "page" to "Page"
   )
 }
 
-export default Page;  // Renamed from "page" to "Page"
+export default Page; 

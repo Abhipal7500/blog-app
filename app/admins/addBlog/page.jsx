@@ -36,30 +36,30 @@ const Page = () => {
             formData.append('image', image);
     
             const response = await axios.post('/api/blog', formData);
-            toast.success("Blog added");
-            // if (response.data.success) {
-                
-            //     await axios.post('/api/email/send', {
-            //         title: data.title,
-            //         description: data.description,
-            //         category: data.category,
-            //     });
     
-            //     toast.success("Blog added & email sent!");
-            //     setImage(false);
-            //     setData({
-            //         title: "",
-            //         description: "",
-            //         category: "Startup",
-            //         author: "Alex Bennett",
-            //         authorImg: "/author_img.png",
-            //     });
-            // } else {
-            //     toast.error("Failed to add blog.");
-            // }
+            if (response.data.success) {
+                
+                await axios.post('/api/email/send', {
+                    title: data.title,
+                    description: data.description,
+                    category: data.category,
+                });
+    
+                toast.success("Blog added & email sent!");
+                setImage(false);
+                setData({
+                    title: "",
+                    description: "",
+                    category: "Startup",
+                    author: "Alex Bennett",
+                    authorImg: "/author_img.png",
+                });
+            } else {
+                toast.error("Failed to add blog.");
+            }
         } catch (error) {
             console.error("Error:", error);
-            toast.error("Error while adding blog.");
+            toast.error("Error sending email.");
         }
     };
     

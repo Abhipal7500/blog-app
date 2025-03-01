@@ -59,7 +59,7 @@ const Page = () => {
             }
         } catch (error) {
             console.error("Error:", error);
-            toast.error("Error sending email.");
+            toast.error("Error sending email from frontend.");
         }
     };
     

@@ -13,7 +13,6 @@
     "dotenv": "^16.4.7",
     "formidable": "^3.5.2",
     "framer-motion": "^12.4.3",
-    "ioredis": "^5.5.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.0",
     "next": "14.0.4",

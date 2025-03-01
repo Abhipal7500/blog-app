@@ -39,13 +39,13 @@ const Page = () => {
     
             if (response.data.success) {
                 
-                // await axios.post('/api/email/send', {
-                //     title: data.title,
-                //     description: data.description,
-                //     category: data.category,
-                // });
+                await axios.post('/api/email/send', {
+                    title: data.title,
+                    description: data.description,
+                    category: data.category,
+                });
     
-                toast.success("Blog added");
+                toast.success("Blog added and email send");
                 setImage(false);
                 setData({
                     title: "",
@@ -59,7 +59,7 @@ const Page = () => {
             }
         } catch (error) {
             console.error("Error:", error);
-            toast.error("Error sending email from User side");
+            toast.error("Error sending email");
         }
     };
     

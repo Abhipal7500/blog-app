@@ -39,13 +39,13 @@ const Page = () => {
     
             if (response.data.success) {
                 
-                await axios.post('/api/email/send', {
-                    title: data.title,
-                    description: data.description,
-                    category: data.category,
-                });
+                // await axios.post('/api/email/send', {
+                //     title: data.title,
+                //     description: data.description,
+                //     category: data.category,
+                // });
     
-                toast.success("Blog added & email sent!");
+                toast.success("Blog added");
                 setImage(false);
                 setData({
                     title: "",
